@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        ============================================================
+        SMARTCALC - MAIN HTML FILE
+        ============================================================
+
+        This file defines the structure of the SmartCalc application.
+        CSS controls appearance.
+        JavaScript controls functionality.
+    -->
+
+    <!-- Character encoding -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive layout for mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Browser tab title -->
+    <title>SmartCalc</title>
+
+    <!-- Main stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- =========================================================
+         MAIN APPLICATION
+         ========================================================= -->
+
+    <main class="app">
+
+        <!-- Application heading -->
+        <header class="app-header">
+            <h1>SmartCalc</h1>
+
+            <p>
+                A modern, smart and accessible calculator
+            </p>
+        </header>
+
+
+        <!-- =====================================================
+             CALCULATOR
+             ===================================================== -->
+
+        <section
+            class="calculator"
+            aria-label="SmartCalc calculator"
+        >
+
+            <!-- Calculator display -->
+            <div class="display">
+
+                <!--
+                    Shows the calculation being entered.
+                -->
+                <div
+                    id="expression"
+                    class="expression"
+                    aria-live="polite"
+                >
+                    0
+                </div>
+
+                <!--
+                    Shows the current result.
+                -->
+                <div
+                    id="result"
+                    class="result"
+                    aria-live="polite"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 CALCULATOR BUTTONS
+                 ================================================= -->
+
+            <div class="buttons">
+
+                <!-- Clear -->
+                <button
+                    type="button"
+                    class="button button-clear"
+                    data-action="clear"
+                    aria-label="Clear calculator"
+                >
+                    C
+                </button>
+
+
+                <!-- Backspace -->
+                <button
+                    type="button"
+                    class="button"
+                    data-action="backspace"
+                    aria-label="Delete last character"
+                >
+                    ⌫
+                </button>
+
+
+                <!-- Percentage -->
+                <button
+                    type="button"
+                    class="button"
+                    data-action="percent"
+                    aria-label="Percentage"
+                >
+                    %
+                </button>
+
+
+                <!-- Division -->
+                <button
+                    type="button"
+                    class="button button-operator"
+                    data-operator="/"
+                    aria-label="Divide"
+                >
+                    ÷
+                </button>
+
+
+                <!-- 7 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="7"
+                >
+                    7
+                </button>
+
+
+                <!-- 8 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="8"
+                >
+                    8
+                </button>
+
+
+                <!-- 9 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="9"
+                >
+                    9
+                </button>
+
+
+                <!-- Multiplication -->
+                <button
+                    type="button"
+                    class="button button-operator"
+                    data-operator="*"
+                    aria-label="Multiply"
+                >
+                    ×
+                </button>
+
+
+                <!-- 4 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="4"
+                >
+                    4
+                </button>
+
+
+                <!-- 5 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="5"
+                >
+                    5
+                </button>
+
+
+                <!-- 6 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="6"
+                >
+                    6
+                </button>
+
+
+                <!-- Subtraction -->
+                <button
+                    type="button"
+                    class="button button-operator"
+                    data-operator="-"
+                    aria-label="Subtract"
+                >
+                    −
+                </button>
+
+
+                <!-- 1 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="1"
+                >
+                    1
+                </button>
+
+
+                <!-- 2 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="2"
+                >
+                    2
+                </button>
+
+
+                <!-- 3 -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="3"
+                >
+                    3
+                </button>
+
+
+                <!-- Addition -->
+                <button
+                    type="button"
+                    class="button button-operator"
+                    data-operator="+"
+                    aria-label="Add"
+                >
+                    +
+                </button>
+
+
+                <!-- Decimal -->
+                <button
+                    type="button"
+                    class="button"
+                    data-action="decimal"
+                    aria-label="Decimal point"
+                >
+                    .
+                </button>
+
+
+                <!-- Zero -->
+                <button
+                    type="button"
+                    class="button"
+                    data-number="0"
+                >
+                    0
+                </button>
+
+
+                <!-- Voice button
+                     Functionality will be added later. -->
+                <button
+                    type="button"
+                    class="button button-voice"
+                    data-action="voice"
+                    aria-label="Voice mode"
+                >
+                    🔊
+                </button>
+
+
+                <!-- Equals -->
+                <button
+                    type="button"
+                    class="button button-equals"
+                    data-action="equals"
+                    aria-label="Calculate result"
+                >
+                    =
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+         =========================================================
+
+         JavaScript is loaded at the end so that the HTML elements
+         already exist when the script starts.
+         ========================================================= -->
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

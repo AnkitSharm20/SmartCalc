@@ -1,0 +1,718 @@
+/*
+    ============================================================
+    SMARTCALC - MODERN UI
+    ============================================================
+
+    Stage 3:
+    - Modern visual design
+    - Dark / light theme foundation
+    - Responsive layout
+    - Better buttons
+    - Smooth animations
+    - Accessibility-friendly focus states
+
+    NOTE:
+    Calculator functionality is handled separately by JavaScript.
+*/
+
+
+/* ============================================================
+   GLOBAL VARIABLES
+   ============================================================ */
+
+:root {
+
+    /* Main page background */
+    --page-background: #eef2f7;
+
+    /* Calculator card */
+    --calculator-background: rgba(255, 255, 255, 0.88);
+
+    /* Calculator display */
+    --display-background: #111827;
+
+    /* Primary text */
+    --text-primary: #111827;
+
+    /* Secondary text */
+    --text-secondary: #6b7280;
+
+    /* Normal button */
+    --button-background: #f3f4f6;
+
+    /* Button hover */
+    --button-hover: #e5e7eb;
+
+    /* Operator button */
+    --operator-background: #e0e7ff;
+
+    /* Clear button */
+    --clear-background: #fee2e2;
+
+    /* Voice button */
+    --voice-background: #dcfce7;
+
+    /* Equals button */
+    --equals-background: #2563eb;
+
+    /* Equals text */
+    --equals-text: #ffffff;
+
+    /* Border */
+    --border-color: rgba(17, 24, 39, 0.08);
+
+    /* Main shadow */
+    --calculator-shadow:
+        0 25px 70px rgba(15, 23, 42, 0.14);
+
+    /* Button shadow */
+    --button-shadow:
+        0 5px 15px rgba(15, 23, 42, 0.06);
+
+    /* Common radius */
+    --radius-large: 28px;
+    --radius-medium: 18px;
+}
+
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/*
+    Prevents accidental horizontal scrolling.
+*/
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+/* ============================================================
+   BODY
+   ============================================================ */
+
+body {
+
+    /*
+        Modern system font stack.
+    */
+
+    font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: var(--text-primary);
+
+    background:
+        radial-gradient(
+            circle at top left,
+            rgba(99, 102, 241, 0.14),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            rgba(14, 165, 233, 0.12),
+            transparent 35%
+        ),
+        var(--page-background);
+
+    /*
+        Keeps the application centered.
+    */
+
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 32px;
+
+    /*
+        Prevents the background from moving during scroll.
+    */
+
+    background-attachment: fixed;
+}
+
+
+/* ============================================================
+   APPLICATION
+   ============================================================ */
+
+.app {
+
+    width: 100%;
+
+    max-width: 440px;
+
+    /*
+        Allows the calculator to remain usable
+        on very small screens.
+    */
+
+    margin: auto;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.app-header {
+
+    text-align: center;
+
+    margin-bottom: 22px;
+}
+
+
+.app-header h1 {
+
+    /*
+        Large modern heading.
+    */
+
+    font-size: clamp(2rem, 7vw, 2.8rem);
+
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    margin-bottom: 7px;
+
+    /*
+        Gradient text effect.
+    */
+
+    background:
+        linear-gradient(
+            135deg,
+            #111827,
+            #4f46e5
+        );
+
+    -webkit-background-clip: text;
+
+    background-clip: text;
+
+    color: transparent;
+}
+
+
+.app-header p {
+
+    color: var(--text-secondary);
+
+    font-size: 0.9rem;
+
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   CALCULATOR CARD
+   ============================================================ */
+
+.calculator {
+
+    /*
+        Semi-transparent card creates a modern
+        glass-like appearance.
+    */
+
+    background:
+        var(--calculator-background);
+
+    backdrop-filter: blur(18px);
+
+    -webkit-backdrop-filter: blur(18px);
+
+    border: 1px solid var(--border-color);
+
+    border-radius: var(--radius-large);
+
+    padding: 18px;
+
+    box-shadow: var(--calculator-shadow);
+
+    /*
+        Keeps content inside rounded corners.
+    */
+
+    overflow: hidden;
+}
+
+
+/* ============================================================
+   DISPLAY
+   ============================================================ */
+
+.display {
+
+    min-height: 145px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #111827,
+            #1f2937
+        );
+
+    color: white;
+
+    border-radius: 22px;
+
+    padding: 22px;
+
+    margin-bottom: 16px;
+
+    /*
+        Display content stays at the bottom.
+    */
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: flex-end;
+
+    overflow: hidden;
+
+    /*
+        Subtle inner shadow.
+    */
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 12px 25px rgba(15, 23, 42, 0.18);
+}
+
+
+/* Expression shown above the result */
+
+.expression {
+
+    width: 100%;
+
+    min-height: 24px;
+
+    color: #9ca3af;
+
+    font-size: 0.95rem;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+
+/*
+    Hide scrollbar on WebKit browsers.
+*/
+
+.expression::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* Main result */
+
+.result {
+
+    width: 100%;
+
+    margin-top: 7px;
+
+    color: #ffffff;
+
+    font-size: clamp(2rem, 9vw, 3rem);
+
+    font-weight: 700;
+
+    letter-spacing: -0.04em;
+
+    text-align: right;
+
+    white-space: nowrap;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+
+.result::-webkit-scrollbar {
+    display: none;
+}
+
+
+/* ============================================================
+   BUTTON GRID
+   ============================================================ */
+
+.buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 10px;
+}
+
+
+/* ============================================================
+   BUTTON BASE
+   ============================================================ */
+
+.button {
+
+    /*
+        Remove browser defaults.
+    */
+
+    border: none;
+
+    outline: none;
+
+    min-height: 66px;
+
+    border-radius: var(--radius-medium);
+
+    background: var(--button-background);
+
+    color: var(--text-primary);
+
+    font: inherit;
+
+    font-size: 1.08rem;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: var(--button-shadow);
+
+    /*
+        Makes button movement feel natural.
+    */
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* ============================================================
+   BUTTON HOVER
+   ============================================================ */
+
+.button:hover {
+
+    background: var(--button-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 18px rgba(15, 23, 42, 0.10);
+}
+
+
+/* ============================================================
+   BUTTON PRESS
+   ============================================================ */
+
+.button:active {
+
+    transform:
+        translateY(1px)
+        scale(0.96);
+
+    box-shadow:
+        0 3px 8px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ============================================================
+   KEYBOARD ACCESSIBILITY
+   ============================================================ */
+
+/*
+    Shows a visible outline when navigating
+    with a keyboard.
+*/
+
+.button:focus-visible {
+
+    outline: 3px solid rgba(37, 99, 235, 0.35);
+
+    outline-offset: 3px;
+}
+
+
+/* ============================================================
+   OPERATOR BUTTONS
+   ============================================================ */
+
+.button-operator {
+
+    background:
+        var(--operator-background);
+
+    color: #3730a3;
+}
+
+
+/*
+    Operator hover state.
+*/
+
+.button-operator:hover {
+
+    background: #c7d2fe;
+}
+
+
+/* ============================================================
+   CLEAR BUTTON
+   ============================================================ */
+
+.button-clear {
+
+    background: var(--clear-background);
+
+    color: #b91c1c;
+}
+
+
+.button-clear:hover {
+
+    background: #fecaca;
+}
+
+
+/* ============================================================
+   VOICE BUTTON
+   ============================================================ */
+
+.button-voice {
+
+    background: var(--voice-background);
+
+    color: #166534;
+}
+
+
+.button-voice:hover {
+
+    background: #bbf7d0;
+}
+
+
+/* ============================================================
+   EQUALS BUTTON
+   ============================================================ */
+
+.button-equals {
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+
+    color: var(--equals-text);
+
+    box-shadow:
+        0 10px 22px rgba(37, 99, 235, 0.28);
+}
+
+
+.button-equals:hover {
+
+    background:
+        linear-gradient(
+            135deg,
+            #1d4ed8,
+            #4338ca
+        );
+
+    box-shadow:
+        0 14px 26px rgba(37, 99, 235, 0.34);
+}
+
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+/*
+    Some users prefer fewer animations.
+    This accessibility rule respects their preference.
+*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration: 0.01ms !important;
+
+        animation-iteration-count: 1 !important;
+
+        transition-duration: 0.01ms !important;
+
+        scroll-behavior: auto !important;
+    }
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    body {
+
+        padding: 20px;
+    }
+
+    .app {
+
+        max-width: 430px;
+    }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 480px) {
+
+    body {
+
+        padding: 12px;
+
+        align-items: flex-start;
+    }
+
+
+    .app {
+
+        margin-top: 18px;
+    }
+
+
+    .app-header {
+
+        margin-bottom: 16px;
+    }
+
+
+    .app-header h1 {
+
+        font-size: 2rem;
+    }
+
+
+    .calculator {
+
+        padding: 13px;
+
+        border-radius: 24px;
+    }
+
+
+    .display {
+
+        min-height: 135px;
+
+        padding: 18px;
+
+        border-radius: 19px;
+    }
+
+
+    .button {
+
+        min-height: 60px;
+
+        border-radius: 15px;
+
+        font-size: 1rem;
+    }
+
+
+    .buttons {
+
+        gap: 8px;
+    }
+}
+
+
+/* ============================================================
+   VERY SMALL SCREENS
+   ============================================================ */
+
+@media (max-width: 350px) {
+
+    body {
+
+        padding: 8px;
+    }
+
+
+    .calculator {
+
+        padding: 10px;
+    }
+
+
+    .button {
+
+        min-height: 54px;
+
+        border-radius: 13px;
+    }
+
+
+    .buttons {
+
+        gap: 6px;
+    }
+
+
+    .display {
+
+        padding: 15px;
+    }
+}
